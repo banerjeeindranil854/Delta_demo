@@ -1,0 +1,81 @@
+openapi: 3.0.3
+info:
+  title: Swagger Shopping basket - OpenAPI 3.0
+  description: |-
+    this is a open API project demo on shoping basket
+  contact:
+    email: banerjeeindranil854@gmail.com
+  version: 1.0.11
+tags:
+  - name: Shoping
+    description: Everything about shopping
+    externalDocs:
+      description: Find out more
+      url: http://swagger.io
+paths:
+  /basket:
+    post:
+      tags:
+        - Shoping
+      summary: find the total amount of the shopping basket
+      description: get the total amount of the shopping basket items
+      operationId: findTotalOrderAmount
+      requestBody:
+        description: gey the amount for the shopping basket
+        content:
+          application/json:
+            schema:
+              type: array
+              items :
+                $ref: '#/components/schemas/basket'
+          application/xml:
+            schema:
+              type: array
+              items :
+                $ref: '#/components/schemas/basket'
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items :
+                $ref: '#/components/schemas/basket'
+        required: true
+      responses:
+        '200':
+          description: successful got the amount
+        '400':
+          description: Invalid status value
+
+components:
+  schemas:
+    basket:
+      required:
+        - name
+      type: object
+      properties:
+        name:
+          type: string
+          example: apple  
+      xml:
+        name: basket
+    ApiResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        type:
+          type: string
+        message:
+          type: string
+      xml:
+        name: '##default'
+  requestBodies:
+    Pet:
+      description: get the value for the indivigual object in the basket
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/basket'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/basket'
